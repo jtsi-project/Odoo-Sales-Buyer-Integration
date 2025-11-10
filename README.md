@@ -1,4 +1,5 @@
-***PERHATIAN: ADDONS INI UNTUK Odoo 16.0-20251110 (Community Edition) SETIAP ADDONS MENYESUAIKAN VERSI BASE 16 - 18 later required manage knowledge of OWL 2.0!***
+***PERHATIAN: ADDONS INI UNTUK Odoo 16.0-20251110 (Community Edition) SETIAP ADDONS MENYESUAIKAN VERSI BASE 17 - 18 later required manage knowledge of OWL 2.0!***
+
 # Odoo-Sales-Orders-Integration
 Modul Tes Teknis untuk PT. SAS Kreasindo Utama.
 Dibuat oleh Anjas Amar Pradana.
