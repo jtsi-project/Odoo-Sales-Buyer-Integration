@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--
+        This record inherits the main form view of the Sales Order (sale.order).
+        It adds the new fields and notebook page as required by the test.
+        The view's architecture is modified using XPath expressions.
+        -->
+        <record id="view_order_form_inherit_ancom" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.ancom</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <!--
+                Requirement 2.1: Add 'Create PO' button to the header.
+                Position: Before the 'Cancel' button.
+                The button is only visible if 'With PO' is True and the state is 'draft' or 'sent'.
+                -->
+                <xpath expr="//header/button[@name='action_cancel']" position="before">
+                    <!-- Button to create a Purchase Order -->
+                    <button name="action_create_po"
+                            string="Create PO"
+                            class="oe_highlight"
+                            type="object"
+                            attrs="{'invisible': ['|', ('x_with_po', '=', False), ('state', 'not in', ['draft', 'sent'])]}"/>
+                    <!-- Button to open the Import SO Lines wizard -->
+                    <button name="%(ancom_sales_orders.action_import_so_lines_wizard)d"
+                            string="Import SO Lines"
+                            type="action"
+                            attrs="{'invisible': [('state', 'not in', ['draft', 'sent'])]}"/>
+                </xpath>
+
+                <!--
+                Requirement 1.1: Add 'Request Vendor' field.
+                Position: After the 'partner_id' (Customer) field.
+                -->
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="x_request_vendor_id"
+                           attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                </xpath>
+
+                <!--
+                Requirement 1.2 & 1.3: Add 'No Kontrak' and 'With PO' fields.
+                Position: After the 'payment_term_id' field.
+                The fields are placed inside a 'group' for proper alignment.
+                -->
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="x_no_kontrak"
+                           attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                    <field name="x_with_po"
+                           attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                </xpath>
+
+                <!--
+                Requirement 1.4 & 1.5: Add 'Purchase Orders' notebook tab and the One2many field.
+                Position: After the 'order_lines' notebook page.
+                -->
+                <xpath expr="//notebook/page[@name='order_lines']" position="after">
+                    <page string="Purchase Orders" name="purchase_orders_page">
+                        <!--
+                        This field displays the related Purchase Orders.
+                        It's set to readonly as it's a computed field and should not be edited directly.
+                        A tree view is defined inline to show the most relevant PO information.
+                        -->
+                        <field name="x_po_line_ids" readonly="1">
+                            <tree>
+                                <field name="name" string="Reference"/>
+                                <field name="partner_id" string="Vendor"/>
+                                <field name="date_order" string="Order Date"/>
+                                <field name="amount_total" string="Total"/>
+                                <field name="state" string="Status"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

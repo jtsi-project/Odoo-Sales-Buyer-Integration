@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--
+        Form View for the Import SO Lines Wizard
+        -->
+        <record id="view_import_so_lines_wizard_form" model="ir.ui.view">
+            <field name="name">import.so.lines.wizard.form</field>
+            <field name="model">ancom_sales_orders.import.so.lines.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="file_upload" filename="file_name"/>
+                        <field name="file_name" invisible="1"/>
+                    </group>
+                    <p>
+                        Please upload an Excel file (.xls or .xlsx) with the following columns:
+                        <br/>
+                        <b>Product Code</b> | <b>Qty</b> | <b>Unit Price</b>
+                    </p>
+                    <footer>
+                        <button name="action_import_lines"
+                                string="Import"
+                                type="object"
+                                class="oe_highlight"/>
+                        <button string="Cancel"
+                                class="btn-secondary"
+                                special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!--
+        Action to open the Import SO Lines Wizard
+        -->
+        <record id="action_import_so_lines_wizard" model="ir.actions.act_window">
+            <field name="name">Import SO Lines</field>
+            <field name="res_model">ancom_sales_orders.import.so.lines.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>
