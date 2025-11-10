@@ -1,4 +1,5 @@
-# Odoo--Sales-Buyer-Integration
+***PERHATIAN: ADDONS INI UNTUK Odoo 16.0-20251110 (Community Edition) SETIAP ADDONS MENYESUAIKAN VERSI BASE 16 - 18 later required manage knowledge of OWL 2.0!***
+# Odoo-Sales-Orders-Integration
 Modul Tes Teknis untuk PT. SAS Kreasindo Utama.
 Dibuat oleh Anjas Amar Pradana.
 Modul ini menghubungkan Sales Order (SO) dengan Purchase Order (PO), menambahkan field kustom, validasi, dan fitur impor dari Excel.
@@ -6,7 +7,7 @@ Modul ini menghubungkan Sales Order (SO) dengan Purchase Order (PO), menambahkan
 ROADMAP & FITUR YANG DIKERJAKAN
 ================================
 
-Modul: Integrasi Penjualan & Pembelian (custom_tio)
+Modul: Integrasi Penjualan & Pembelian (ancom_sales_orders)
 Author: Anjas Amar Pradana
 
 Berikut adalah daftar fitur yang telah diimplementasikan sesuai dengan dokumen "Test Technical Odoo PT. SAS Kreasindo.pdf".
