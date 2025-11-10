@@ -12,7 +12,7 @@ This module is a technical test submission. It enhances the Sales Order function
 - Providing a wizard to import Sales Order lines from an Excel file.
     """,
     'author': 'Anjas Amar Pradana',
-    'website': 'https://www.linkedin.com/in/anjasamarpradana/',
+    'website': 'https://www.linkedin.com/in/anjas-amar-pradana/',
     'category': 'Sales',
     'depends': [
         'sale_management',
