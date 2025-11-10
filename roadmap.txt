@@ -1,7 +1,7 @@
 ROADMAP & FITUR YANG DIKERJAKAN
 ================================
 
-Modul: Integrasi Penjualan & Pembelian (custom_tio)
+Modul: Integrasi Custom Forms Penjualan & Pembelian (ancom_sales_orders)
 Author: Anjas Amar Pradana
 
 Berikut adalah daftar fitur yang telah diimplementasikan sesuai dengan dokumen "Test Technical Odoo PT. SAS Kreasindo.pdf".
