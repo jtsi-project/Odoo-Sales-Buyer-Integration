@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 - Anjas Amar Pradana, PT. Sas Kreasindo Utama Applicant -->
+<odoo>
+    <!--
+        File ini mendefinisikan antarmuka pengguna untuk wizard Impor Baris SO.
+        Termasuk form view untuk wizard dan window action untuk memanggilnya.
+        Memenuhi Requirement 3.
+    -->
+
+    <!-- Form View untuk Wizard -->
+    <record id="view_import_so_lines_wizard_form" model="ir.ui.view">
+        <field name="name">import.so.lines.wizard.form</field>
+        <field name="model">import.so.lines.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <p>
+                        Silakan pilih file Excel (.xls atau .xlsx) dengan kolom berikut:
+                        <b>Kode Produk</b>, <b>Kuantitas</b>, <b>Harga Satuan</b>.
+                    </p>
+                    <field name="file_data" filename="file_name" widget="binary"/>
+                    <field name="file_name" invisible="1"/>
+                </group>
+                <footer>
+                    <button name="action_import_so_lines" string="Impor" type="object" class="btn-primary"/>
+                    <button string="Batal" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action untuk membuka wizard -->
+    <record id="action_import_so_lines_wizard" model="ir.actions.act_window">
+        <field name="name">Impor Baris Pesanan Penjualan</field>
+        <field name="res_model">import.so.lines.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_view_types">form</field>
+    </record>
+</odoo>

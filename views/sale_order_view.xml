@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2025 - Anjas Amar Pradana, PT. Sas Kreasindo Utama Applicant -->
+<odoo>
+    <!--
+        View ini mewarisi form Sales Order utama untuk menambahkan field dan tombol baru
+        sesuai dengan kebutuhan tes teknis.
+    -->
+    <record id="view_order_form_custom_tio" model="ir.ui.view">
+        <field name="name">sale.order.form.custom.tio</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+
+            <!--
+                Requirement 2.1 & 2.2: Tambah Tombol "Buat PO"
+                Tombol ini memanggil metode 'action_create_po'.
+                Hanya terlihat ketika checkbox 'Dengan PO' dicentang.
+            -->
+            <xpath expr="//header" position="inside">
+                <button name="action_create_po" string="Buat PO" type="object"
+                        class="oe_highlight" invisible="not x_with_po"/>
+            </xpath>
+
+            <!--
+                Requirement 3.1: Tambah Tombol "Impor Baris SO"
+                Tombol ini membuka wizard untuk mengimpor baris SO dari file Excel.
+                Memanggil window action 'action_import_so_lines_wizard'.
+            -->
+            <xpath expr="//header" position="inside">
+                 <button name="%(custom_tio.action_import_so_lines_wizard)d" string="Impor Baris SO" type="action"
+                        class="oe_highlight"/>
+            </xpath>
+
+            <!--
+                Requirement 1.1, 1.2, 1.3: Tambah Field Kustom
+                Field-field ini ditambahkan setelah field 'payment_term_id'.
+            -->
+            <xpath expr="//field[@name='payment_term_id']" position="after">
+                <!-- Req 1.1: Vendor Permintaan -->
+                <field name="x_request_vendor_id" context="{'res_partner_search_mode': 'supplier'}"
+                       options="{'no_create_edit': True}"/>
+                <!-- Req 1.2: No Kontrak -->
+                <field name="x_no_kontrak"/>
+                <!-- Req 1.3: Dengan PO -->
+                <field name="x_with_po"/>
+            </xpath>
+
+            <!--
+                Requirement 1.4 & 1.5: Tambah Tab "Pesanan Pembelian" dan Field-nya
+                Sebuah tab notebook baru ditambahkan untuk menampilkan daftar Pesanan Pembelian
+                yang dibuat dari Pesanan Penjualan ini.
+            -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Pesanan Pembelian" name="purchase_orders" invisible="not id">
+                    <field name="x_po_ids" readonly="1"/>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

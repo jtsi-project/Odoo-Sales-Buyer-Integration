@@ -1,0 +1,48 @@
+# Odoo--Sales-Buyer-Integration
+Modul Tes Teknis untuk PT. SAS Kreasindo Utama.
+Dibuat oleh Anjas Amar Pradana.
+Modul ini menghubungkan Sales Order (SO) dengan Purchase Order (PO), menambahkan field kustom, validasi, dan fitur impor dari Excel.
+
+ROADMAP & FITUR YANG DIKERJAKAN
+================================
+
+Modul: Integrasi Penjualan & Pembelian (custom_tio)
+Author: Anjas Amar Pradana
+
+Berikut adalah daftar fitur yang telah diimplementasikan sesuai dengan dokumen "Test Technical Odoo PT. SAS Kreasindo.pdf".
+
+-------------------------
+Requirement 1: Penambahan Field & Tampilan di Sales Order
+-------------------------
+- [x] 1. Menambahkan field "Vendor Permintaan" (Request Vendor) bertipe Many2one ke res.partner.
+- [x] 2. Menambahkan field "No Kontrak" bertipe Char.
+- [x] 3. Menambahkan field "Dengan PO" (With PO) bertipe Boolean.
+- [x] 4. Menambahkan Tab/Notebook baru "Pesanan Pembelian" (Purchase Orders).
+- [x] 5. Menambahkan field One2many di dalam tab tersebut untuk menampilkan daftar Purchase Order yang terkait.
+
+-------------------------
+Requirement 2: Logika Bisnis & Tombol
+-------------------------
+- [x] 1. Menambahkan tombol "Buat PO" (Create PO) di header Sales Order.
+    - [x] Logika: Saat diklik, otomatis membuat Purchase Order baru.
+    - [x] Vendor di PO diambil dari field "Vendor Permintaan".
+    - [x] Referensi Vendor di PO diambil dari nomor Sales Order.
+    - [x] Baris produk (Order Line) di PO disalin dari baris produk di SO.
+- [x] 2. Mengatur visibilitas tombol "Buat PO".
+    - [x] Tombol hanya muncul jika field "Dengan PO" dicentang (True).
+    - [x] Tombol akan tersembunyi jika field "Dengan PO" tidak dicentang (False).
+- [x] 3. Modifikasi tombol "Confirm" pada Sales Order.
+    - [x] Menambahkan validasi untuk memastikan "No Kontrak" belum pernah digunakan di SO lain yang sudah dikonfirmasi.
+    - [x] Jika sudah ada, akan muncul pesan error. Jika belum, proses konfirmasi berlanjut.
+
+-------------------------
+Requirement 3: Fitur Impor
+-------------------------
+- [x] 1. Menambahkan tombol "Impor Baris SO" (Import SO Lines) di header Sales Order.
+- [x] 2. Saat diklik, akan muncul pop-up/wizard untuk mengunggah file.
+- [x] 3. Wizard memiliki fungsionalitas untuk mengunggah file Excel (.xls/.xlsx).
+- [x] 4. Logika Impor:
+    - [x] Sistem membaca file Excel yang diunggah.
+    - [x] Mencari produk berdasarkan "Kode Produk" (default_code) dari file.
+    - [x] Menambahkan baris-baris produk baru ke dalam Sales Order sesuai data (Produk, Kuantitas, Harga Satuan) dari file Excel.
+- [ ] 5. Tombol "Download Template" tidak dikerjakan karena bersifat opsional (tidak wajib).
